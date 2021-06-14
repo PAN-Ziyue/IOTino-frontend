@@ -144,7 +144,7 @@ class Workplace extends Component<WorkplaceProps> {
       radarData,
     } = this.props;
 
-    if (!currentUser || !currentUser.userid) {
+    if (!currentUser || !currentUser.account) {
       return null;
     }
     return (

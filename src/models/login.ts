@@ -57,7 +57,7 @@ const Model: LoginModelType = {
             return;
           }
         }
-        history.replace(redirect || '/device/dashboard');
+        history.replace(redirect || '/manage/dashboard');
       }
     },
 

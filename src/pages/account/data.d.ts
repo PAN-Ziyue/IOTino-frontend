@@ -27,7 +27,7 @@ export interface NoticeType {
 export interface CurrentUser {
   name: string;
   avatar: string;
-  userid: string;
+  account: string;
   notice: NoticeType[];
   email: string;
   signature: string;
