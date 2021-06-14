@@ -13,6 +13,8 @@ export default {
   // login
   'pages.login.emailLogin.tab': 'Email Login',
   'pages.login.emailLogin.errorMessage': 'Incorrect email/password',
+  'pages.login.accountLogin.tab': 'Account Login',
+  'pages.login.accountLogin.errorMessage': 'Incorrect account/password',
   'pages.login.password.placeholder': 'Password',
   'pages.login.password.required': 'Please input your password!',
   'pages.login.rememberMe': 'Remember me',

@@ -7,7 +7,7 @@ export type LoginParamsType = {
 
 export async function fakeAccountLogin(params: LoginParamsType) {
   return request('/api/login', {
-    method: 'GET',
+    method: 'POST',
     data: params,
   });
 }

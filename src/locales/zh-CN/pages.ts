@@ -12,6 +12,8 @@ export default {
   // login
   'pages.login.emailLogin.tab': '邮箱密码登录',
   'pages.login.emailLogin.errorMessage': '错误的邮箱和密码',
+  'pages.login.accountLogin.tab': '用户名密码登录',
+  'pages.login.accountLogin.errorMessage': '错误的用户名和密码',
   'pages.login.password.placeholder': '密码',
   'pages.login.password.required': '密码是必填项！',
   'pages.login.rememberMe': '自动登录',
