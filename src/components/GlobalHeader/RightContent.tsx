@@ -8,7 +8,6 @@ import type { ConnectState } from '@/models/connect';
 import Avatar from './AvatarDropdown';
 import HeaderSearch from '../HeaderSearch';
 import styles from './index.less';
-import NoticeIconView from './NoticeIconView';
 
 export type GlobalHeaderRightProps = {
   theme?: ProSettings['navTheme'] | 'realDark';
@@ -68,7 +67,6 @@ const GlobalHeaderRight: React.SFC<GlobalHeaderRightProps> = (props) => {
           <QuestionCircleOutlined />
         </a>
       </Tooltip>
-      <NoticeIconView />
       <Avatar menu />
       {REACT_APP_ENV && (
         <span>

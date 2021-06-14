@@ -64,7 +64,7 @@ export default defineConfig({
           authority: ['admin', 'user'],
           routes: [
             {
-              path: '/dashboard',
+              path: '/device/dashboard',
               name: 'dashboard',
               icon: 'dashboard',
               component: './dashboard/analysis',
