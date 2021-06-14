@@ -57,6 +57,12 @@ export default defineConfig({
           component: './monitor',
         },
         {
+          name: 'basic-form',
+          path: '/manage/create',
+          icon: 'smile',
+          component: './basic-form',
+        },
+        {
           path: '/form',
           icon: 'form',
           name: 'form',
@@ -66,21 +72,15 @@ export default defineConfig({
               redirect: '/form/basic-form',
             },
             {
-              name: 'basic-form',
-              icon: 'smile',
-              path: '/form/basic-form',
-              component: './form/basic-form',
-            },
-            {
               name: 'step-form',
               icon: 'smile',
-              path: '/form/step-form',
+              path: '/manage/form/step-form',
               component: './form/step-form',
             },
             {
               name: 'advanced-form',
               icon: 'smile',
-              path: '/form/advanced-form',
+              path: '/manage/form/advanced-form',
               component: './form/advanced-form',
             },
           ],
