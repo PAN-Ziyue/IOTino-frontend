@@ -9,7 +9,7 @@ import type { Dispatch } from 'umi';
 import { connect } from 'umi';
 
 import { getTimeDistance } from './utils/utils';
-import type { AnalysisData } from './data.d';
+import type { AnalysisData } from './data';
 import styles from './style.less';
 
 import IntroduceRow from './components/IntroduceRow';

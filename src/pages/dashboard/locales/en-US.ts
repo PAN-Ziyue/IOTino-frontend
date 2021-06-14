@@ -3,7 +3,7 @@ export default {
   'dashboardandanalysis.analysis.introduce': 'Introduce',
   'dashboardandanalysis.analysis.total-devices': 'Total Devices',
   'dashboardandanalysis.analysis.day-sales': 'Daily Sales',
-  'dashboardandanalysis.analysis.visits': 'Visits',
+  'dashboardandanalysis.analysis.visits': 'Total Messages',
   'dashboardandanalysis.analysis.visits-trend': 'Visits Trend',
   'dashboardandanalysis.analysis.visits-ranking': 'Visits Ranking',
   'dashboardandanalysis.analysis.day-visits': 'Daily Visits',

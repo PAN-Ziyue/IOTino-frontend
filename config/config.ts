@@ -48,7 +48,7 @@ export default defineConfig({
           name: 'dashboard',
           path: '/manage/dashboard',
           icon: 'dashboard',
-          component: './dashboard/analysis',
+          component: './dashboard',
         },
         {
           name: 'monitor',
