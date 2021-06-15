@@ -51,12 +51,6 @@ export default defineConfig({
           component: './dashboard',
         },
         {
-          name: 'monitor',
-          path: '/manage/monitor',
-          icon: 'smile',
-          component: './monitor',
-        },
-        {
           name: 'basic-form',
           path: '/manage/create',
           icon: 'smile',

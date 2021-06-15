@@ -16,7 +16,6 @@ import IntroduceRow from './components/IntroduceRow';
 import SalesCard from './components/SalesCard';
 import TopSearch from './components/TopSearch';
 import ProportionSales from './components/ProportionSales';
-import OfflineData from './components/OfflineData';
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 
@@ -117,15 +116,13 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
   };
 
   render() {
-    const { rangePickerValue, salesType, currentTabKey } = this.state;
+    const { rangePickerValue, salesType } = this.state;
     const { dashboardAndanalysis, loading } = this.props;
     const {
       visitData,
       visitData2,
       salesData,
       searchData,
-      offlineData,
-      offlineChartData,
       salesTypeData,
       salesTypeDataOnline,
       salesTypeDataOffline,
@@ -151,7 +148,6 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
       </span>
     );
 
-    const activeKey = currentTabKey || (offlineData[0] && offlineData[0].name);
     return (
       <GridContent>
         <React.Fragment>
@@ -163,37 +159,6 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
             handleRangePickerChange={this.handleRangePickerChange}
             loading={loading}
             selectDate={this.selectDate}
-          />
-          <Row
-            gutter={24}
-            style={{
-              marginTop: 24,
-            }}
-          >
-            <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-              <TopSearch
-                loading={loading}
-                visitData2={visitData2}
-                searchData={searchData}
-                dropdownGroup={dropdownGroup}
-              />
-            </Col>
-            <Col xl={12} lg={24} md={24} sm={24} xs={24}>
-              <ProportionSales
-                dropdownGroup={dropdownGroup}
-                salesType={salesType}
-                loading={loading}
-                salesPieData={salesPieData}
-                handleChangeSalesType={this.handleChangeSalesType}
-              />
-            </Col>
-          </Row>
-          <OfflineData
-            activeKey={activeKey}
-            loading={loading}
-            offlineData={offlineData}
-            offlineChartData={offlineChartData}
-            handleTabChange={this.handleTabChange}
           />
         </React.Fragment>
       </GridContent>
