@@ -1,5 +1,3 @@
-import { EllipsisOutlined } from '@ant-design/icons';
-import { Col, Dropdown, Menu, Row } from 'antd';
 import React, { Component } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import type { RadioChangeEvent } from 'antd/es/radio';
@@ -14,8 +12,6 @@ import styles from './style.less';
 
 import IntroduceRow from './components/IntroduceRow';
 import SalesCard from './components/SalesCard';
-import TopSearch from './components/TopSearch';
-import ProportionSales from './components/ProportionSales';
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 
@@ -116,37 +112,13 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
   };
 
   render() {
-    const { rangePickerValue, salesType } = this.state;
+    const { rangePickerValue } = this.state;
     const { dashboardAndanalysis, loading } = this.props;
     const {
       visitData,
-      visitData2,
       salesData,
-      searchData,
-      salesTypeData,
-      salesTypeDataOnline,
-      salesTypeDataOffline,
     } = dashboardAndanalysis;
-    let salesPieData;
-    if (salesType === 'all') {
-      salesPieData = salesTypeData;
-    } else {
-      salesPieData = salesType === 'online' ? salesTypeDataOnline : salesTypeDataOffline;
-    }
-    const menu = (
-      <Menu>
-        <Menu.Item>操作一</Menu.Item>
-        <Menu.Item>操作二</Menu.Item>
-      </Menu>
-    );
 
-    const dropdownGroup = (
-      <span className={styles.iconGroup}>
-        <Dropdown overlay={menu} placement="bottomRight">
-          <EllipsisOutlined />
-        </Dropdown>
-      </span>
-    );
 
     return (
       <GridContent>
