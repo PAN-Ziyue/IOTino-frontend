@@ -1,4 +1,4 @@
-import { Card, Col, Row, Tabs } from 'antd';
+import { Card, Col, Row } from 'antd';
 import { FormattedMessage, formatMessage } from 'umi';
 import type { RangePickerProps } from 'antd/es/date-picker/generatePicker';
 import type moment from 'moment';
@@ -24,11 +24,8 @@ const SalesCard = ({
   loading,
 }: {
   rangePickerValue: RangePickerValue;
-  isActive: (key: 'today' | 'week' | 'month' | 'year') => string;
   salesData: VisitDataType[];
   loading: boolean;
-  handleRangePickerChange: (dates: RangePickerValue, dateStrings: [string, string]) => void;
-  selectDate: (key: 'today' | 'week' | 'month' | 'year') => void;
 }) => (
   <Card
     loading={loading}

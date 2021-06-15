@@ -7,8 +7,7 @@ import type { Dispatch } from 'umi';
 import { connect } from 'umi';
 
 import { getTimeDistance } from './utils/utils';
-import type { AnalysisData } from './data';
-import styles from './style.less';
+import type { DashboardData } from '@/models/dashboard';
 
 import IntroduceRow from './components/IntroduceRow';
 import SalesCard from './components/SalesCard';
@@ -16,7 +15,7 @@ import SalesCard from './components/SalesCard';
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 
 interface AnalysisProps {
-  dashboardAndanalysis: AnalysisData;
+  dashboardAndanalysis: DashboardData;
   dispatch: Dispatch;
   loading: boolean;
 }
@@ -62,75 +61,27 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     });
   };
 
-  handleTabChange = (key: string) => {
-    this.setState({
-      currentTabKey: key,
-    });
-  };
-
-  handleRangePickerChange = (rangePickerValue: RangePickerValue) => {
-    const { dispatch } = this.props;
-    this.setState({
-      rangePickerValue,
-    });
-
-    dispatch({
-      type: 'dashboardAndanalysis/fetchSalesData',
-    });
-  };
-
-  selectDate = (type: 'today' | 'week' | 'month' | 'year') => {
-    const { dispatch } = this.props;
-    this.setState({
-      rangePickerValue: getTimeDistance(type),
-    });
-
-    dispatch({
-      type: 'dashboardAndanalysis/fetchSalesData',
-    });
-  };
-
-  isActive = (type: 'today' | 'week' | 'month' | 'year') => {
-    const { rangePickerValue } = this.state;
-    if (!rangePickerValue) {
-      return '';
-    }
-    const value = getTimeDistance(type);
-    if (!value) {
-      return '';
-    }
-    if (!rangePickerValue[0] || !rangePickerValue[1]) {
-      return '';
-    }
-    if (
-      rangePickerValue[0].isSame(value[0] as moment.Moment, 'day') &&
-      rangePickerValue[1].isSame(value[1] as moment.Moment, 'day')
-    ) {
-      return styles.currentDate;
-    }
-    return '';
-  };
 
   render() {
     const { rangePickerValue } = this.state;
     const { dashboardAndanalysis, loading } = this.props;
     const {
-      visitData,
+      total,
+      online,
       salesData,
     } = dashboardAndanalysis;
-
 
     return (
       <GridContent>
         <React.Fragment>
-          <IntroduceRow loading={loading} visitData={visitData} />
+          <IntroduceRow 
+            loading={loading} 
+            total={total} 
+            online={online}/>
           <SalesCard
             rangePickerValue={rangePickerValue}
             salesData={salesData}
-            isActive={this.isActive}
-            handleRangePickerChange={this.handleRangePickerChange}
             loading={loading}
-            selectDate={this.selectDate}
           />
         </React.Fragment>
       </GridContent>

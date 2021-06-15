@@ -1,5 +1,5 @@
 import moment from 'moment';
-import type { AnalysisData, RadarData, VisitDataType } from './data.d';
+import type { DashboardData, RadarData, VisitDataType } from './data.d';
 
 // mock data
 const visitData: VisitDataType[] = [];
@@ -179,7 +179,7 @@ radarOriginData.forEach((item) => {
   });
 });
 
-const getFakeChartData: AnalysisData = {
+const getDashboardData: DashboardData = {
   visitData,
   visitData2,
   salesData,
@@ -193,5 +193,5 @@ const getFakeChartData: AnalysisData = {
 };
 
 export default {
-  'GET  /api/fake_chart_data': getFakeChartData,
+  'GET  /api/fake_chart_data': getDashboardData,
 };

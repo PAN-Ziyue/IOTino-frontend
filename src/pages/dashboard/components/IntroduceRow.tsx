@@ -1,13 +1,8 @@
-import { InfoCircleOutlined } from '@ant-design/icons';
-import { Col, Row, Tooltip } from 'antd';
+import { Col, Row } from 'antd';
 
 import { FormattedMessage } from 'umi';
 import React from 'react';
-import numeral from 'numeral';
-import { ChartCard, MiniArea, MiniBar, MiniProgress, Field } from './Charts';
-import type { VisitDataType } from '../data';
-import Trend from './Trend';
-import styles from '../style.less';
+import { ChartCard } from './Charts';
 
 const topColResponsiveProps = {
   xs: 24,
@@ -18,7 +13,8 @@ const topColResponsiveProps = {
   style: { marginBottom: 24 },
 };
 
-const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: VisitDataType[] }) => (
+const IntroduceRow = ({ loading, total, online }:
+  { loading: boolean; total: number, online: number }) => (
   <Row gutter={24}>
     <Col {...topColResponsiveProps}>
       <ChartCard
@@ -30,12 +26,12 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Vis
           />
         }
         loading={loading}
-        total={() => 233}
+        total={total}
         contentHeight={46}
       >
       </ChartCard>
     </Col>
-    
+
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
@@ -46,7 +42,7 @@ const IntroduceRow = ({ loading, visitData }: { loading: boolean; visitData: Vis
           />
         }
         loading={loading}
-        total={() => 233}
+        total={online}
         contentHeight={46}
       >
       </ChartCard>

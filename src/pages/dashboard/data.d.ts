@@ -28,15 +28,4 @@ export interface RadarData {
   value: number;
 }
 
-export interface AnalysisData {
-  visitData: VisitDataType[];
-  visitData2: VisitDataType[];
-  salesData: VisitDataType[];
-  searchData: SearchDataType[];
-  offlineData: OfflineDataType[];
-  offlineChartData: OfflineChartData[];
-  salesTypeData: VisitDataType[];
-  salesTypeDataOnline: VisitDataType[];
-  salesTypeDataOffline: VisitDataType[];
-  radarData: RadarData[];
-}
+
