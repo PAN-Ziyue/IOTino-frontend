@@ -15,7 +15,7 @@ import DataDetail from './components/DataDetail';
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 
 interface AnalysisProps {
-  dashboardAndanalysis: DashboardData;
+  dashboardData: DashboardData;
   dispatch: Dispatch;
   loading: boolean;
 }
@@ -40,7 +40,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     const { dispatch } = this.props;
     this.reqRef = requestAnimationFrame(() => {
       dispatch({
-        type: 'dashboardAndanalysis/fetch',
+        type: 'dashboardData/fetch',
       });
     });
   }
@@ -48,7 +48,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
   componentWillUnmount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'dashboardAndanalysis/clear',
+      type: 'dashboardData/clear',
     });
     cancelAnimationFrame(this.reqRef);
     clearTimeout(this.timeoutId);
@@ -62,14 +62,13 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
 
 
   render() {
-    const { rangePickerValue } = this.state;
-    const { dashboardAndanalysis, loading } = this.props;
+    const { dashboardData, loading } = this.props;
     const {
       total,
       online,
       count,
-      salesData,
-    } = dashboardAndanalysis;
+      chartData,
+    } = dashboardData;
 
     return (
       <GridContent>
@@ -80,8 +79,7 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
             online={online}
             count={count}/>
           <DataDetail
-            rangePickerValue={rangePickerValue}
-            salesData={salesData}
+            chartData={chartData}
             loading={loading}
           />
         </React.Fragment>
@@ -92,15 +90,15 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
 
 export default connect(
   ({
-    dashboardAndanalysis,
+    dashboardData,
     loading,
   }: {
-    dashboardAndanalysis: any;
+    dashboardData: any;
     loading: {
       effects: Record<string, boolean>;
     };
   }) => ({
-    dashboardAndanalysis,
-    loading: loading.effects['dashboardAndanalysis/fetch'],
+    dashboardData,
+    loading: loading.effects['dashboardData/fetch'],
   }),
 )(Analysis);

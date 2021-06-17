@@ -1,36 +1,19 @@
 import {Card, Col, Row} from 'antd';
-import {FormattedMessage, formatMessage} from 'umi';
-import type {RangePickerProps} from 'antd/es/date-picker/generatePicker';
-import type moment from 'moment';
+import {FormattedMessage} from 'umi';
 
 import React from 'react';
 import numeral from 'numeral';
-import type {VisitDataType} from '../data.d';
+import type {DetailDataType} from '@/models/dashboard';
 import {Bar} from './Charts';
 import styles from '../style.less';
 
-const rankingListData: { name: string; count: number }[] = [];
-for (let i = 0; i < 7; i += 1) {
-  rankingListData.push({
-    name: formatMessage({id: 'dashboardandanalysis.analysis.test'}, {no: i}),
-    count: 323234,
-  });
-}
 
-type RangePickerValue = RangePickerProps<moment.Moment>['value'];
-
-const DataDetail = ({salesData, loading}: {
-  rangePickerValue: RangePickerValue;
-  salesData: VisitDataType[];
+const DataDetail = ({loading, chartData}: {
   loading: boolean;
+  chartData: DetailDataType[];
 }) => (
-  <Card
-    loading={loading}
-    bordered={false}
-    bodyStyle={{padding: 0}}
-    title={
-      <FormattedMessage id="dashboard.data-detail"/>
-    }
+  <Card loading={loading} bordered={false}
+        bodyStyle={{padding: 0}} title={<FormattedMessage id="dashboard.data-detail"/>}
   >
     <div className={styles.salesCard}>
       <Row>
@@ -39,7 +22,7 @@ const DataDetail = ({salesData, loading}: {
             <Bar
               height={292}
               title={<FormattedMessage id="dashboard.data-detail.count"/>}
-              data={salesData}
+              data={Object.assign([], chartData).sort(() => (Math.random() > .5) ? 1 : -1)}
             />
           </div>
         </Col>
@@ -49,15 +32,15 @@ const DataDetail = ({salesData, loading}: {
               <FormattedMessage id="dashboard.data-detail.rank"/>
             </h4>
             <ul className={styles.rankingList}>
-              {rankingListData.map((item, i) => (
-                <li key={item.name}>
+              {chartData.map((item, i) => (
+                <li key={item.x}>
                   <span className={`${styles.rankingItemNumber} ${i < 3 ? styles.active : ''}`}>
                     {i + 1}
                   </span>
-                  <span className={styles.rankingItemTitle} title={item.name}>
-                    {item.name}
+                  <span className={styles.rankingItemTitle} title={item.x}>
+                    {item.x}
                   </span>
-                  <span>{numeral(item.count).format('0,0')}</span>
+                  <span>{numeral(item.y).format('0,0')}</span>
                 </li>
               ))}
             </ul>

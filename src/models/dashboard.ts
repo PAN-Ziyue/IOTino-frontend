@@ -1,5 +1,5 @@
-import type { Effect, Reducer } from 'umi';
-import { dashboardData } from '@/services/dashboard';
+import type {Effect, Reducer} from 'umi';
+import {getDashboardData} from '@/services/dashboard';
 
 export interface ModelType {
   namespace: string;
@@ -14,27 +14,23 @@ export interface ModelType {
   };
 }
 
+export interface DetailDataType {
+  x: string;
+  y: number;
+}
+
 export interface DashboardData {
   total: number,
   online: number,
   count: number,
-  
-  // visitData: VisitDataType[];
-  // visitData2: VisitDataType[];
-  // salesData: VisitDataType[];
-  // searchData: SearchDataType[];
-  // offlineData: OfflineDataType[];
-  // offlineChartData: OfflineChartData[];
-  // salesTypeData: VisitDataType[];
-  // salesTypeDataOnline: VisitDataType[];
-  // salesTypeDataOffline: VisitDataType[];
-  // radarData: RadarData[];
+  chartData: DetailDataType[],
 }
 
 const initState = {
   total: 0,
   online: 0,
   count: 0,
+  chartData: []
   // visitData: [],
   // visitData2: [],
   // salesData: [],
@@ -48,20 +44,20 @@ const initState = {
 };
 
 const Model: ModelType = {
-  namespace: 'dashboardAndanalysis',
+  namespace: 'dashboardData',
 
   state: initState,
 
   effects: {
-    *fetch(_, { call, put }) {
-      const response = yield call(dashboardData);
+    * fetch(_, {call, put}) {
+      const response = yield call(getDashboardData);
       yield put({
         type: 'save',
         payload: response,
       });
     },
-    *fetchSalesData(_, { call, put }) {
-      const response = yield call(dashboardData);
+    * fetchSalesData(_, {call, put}) {
+      const response = yield call(getDashboardData);
       yield put({
         type: 'save',
         payload: {
@@ -72,7 +68,7 @@ const Model: ModelType = {
   },
 
   reducers: {
-    save(state, { payload }) {
+    save(state, {payload}) {
       return {
         ...state,
         ...payload,
