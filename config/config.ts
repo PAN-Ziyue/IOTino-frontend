@@ -50,10 +50,10 @@ export default defineConfig({
           component: './dashboard',
         },
         {
-          name: 'table-list',
+          name: 'device',
           path: '/manage/list',
           icon: 'smile',
-          component: './table-list',
+          component: './device',
         },
         {
           path: '/profile',

@@ -6,15 +6,15 @@ import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
-import type { TableListItem } from './data.d';
-import { queryRule, updateRule, addRule, removeRule } from './service';
+import type { DeviceItem } from '@/models/device';
+import { queryDevice, updateRule, addRule, removeRule } from '@/services/device';
 
 /**
  * 添加节点
  *
  * @param fields
  */
-const handleAdd = async (fields: TableListItem) => {
+const handleAdd = async (fields: DeviceItem) => {
   const hide = message.loading('正在添加');
   try {
     await addRule({ ...fields });
@@ -33,7 +33,7 @@ const handleAdd = async (fields: TableListItem) => {
  *
  * @param fields
  */
-const handleUpdate = async (fields: TableListItem) => {
+const handleUpdate = async (fields: DeviceItem) => {
   const hide = message.loading('正在配置');
   try {
     await updateRule({
@@ -57,7 +57,7 @@ const handleUpdate = async (fields: TableListItem) => {
  *
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: TableListItem[]) => {
+const handleRemove = async (selectedRows: DeviceItem[]) => {
   const hide = message.loading('正在删除');
   if (!selectedRows) return true;
   try {
@@ -78,11 +78,11 @@ const TableList: React.FC<{}> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const actionRef = useRef<ActionType>();
-  const [selectedRowsState, setSelectedRows] = useState<TableListItem[]>([]);
-  const columns: ProColumns<TableListItem>[] = [
+  const [selectedRowsState, setSelectedRows] = useState<DeviceItem[]>([]);
+  const columns: ProColumns<DeviceItem>[] = [
     {
-      title: '规则名称',
-      dataIndex: 'name',
+      title: '设备ID',
+      dataIndex: 'device',
 
       formItemProps: {
         rules: [
@@ -95,7 +95,7 @@ const TableList: React.FC<{}> = () => {
     },
     {
       title: '设备名称',
-      dataIndex: 'desc',
+      dataIndex: 'name',
 
       formItemProps: {
         rules: [
@@ -107,11 +107,9 @@ const TableList: React.FC<{}> = () => {
       },
     },
     {
-      title: '服务调用次数',
-      dataIndex: 'callNo',
-      sorter: true,
+      title: '数据量',
+      dataIndex: 'count',
       hideInForm: true,
-      renderText: (val: string) => `${val} 万`,
     },
     {
       title: '状态',
@@ -122,23 +120,6 @@ const TableList: React.FC<{}> = () => {
         1: { text: '运行中', status: 'Processing' },
         2: { text: '已上线', status: 'Success' },
         3: { text: '异常', status: 'Error' },
-      },
-    },
-    {
-      title: '上次调度时间',
-      dataIndex: 'updatedAt',
-      sorter: true,
-      valueType: 'dateTime',
-      hideInForm: true,
-      renderFormItem: (item, { defaultRender, ...rest }, form) => {
-        const status = form.getFieldValue('status');
-        if (`${status}` === '0') {
-          return false;
-        }
-        if (`${status}` === '3') {
-          return <Input {...rest} placeholder="请输入异常原因！" />;
-        }
-        return defaultRender(item);
       },
     },
     {
@@ -157,19 +138,19 @@ const TableList: React.FC<{}> = () => {
 
   return (
     <GridContent>
-      <ProTable<TableListItem>
+      <ProTable<DeviceItem>
         headerTitle="查询表格"
         actionRef={actionRef}
         rowKey="key"
-        search={{
-          labelWidth: 120,
-        }}
+        search={false}
+        options={false}
+        pagination={false}
         toolBarRender={() => [
           <Button type="primary" onClick={() => handleModalVisible(true)}>
             <PlusOutlined /> 新建
           </Button>,
         ]}
-        request={(params, sorter, filter) => queryRule({ ...params, sorter, filter })}
+        request={(params) => queryDevice({ ...params })}
         columns={columns}
         rowSelection={{
           onChange: (_, selectedRows) => setSelectedRows(selectedRows),
@@ -179,10 +160,7 @@ const TableList: React.FC<{}> = () => {
         <FooterToolbar
           extra={
             <div>
-              已选择 <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a> 项&nbsp;&nbsp;
-              <span>
-                服务调用次数总计 {selectedRowsState.reduce((pre, item) => pre + item.callNo, 0)} 万
-              </span>
+              已选择 <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a> 项
             </div>
           }
         >
@@ -198,7 +176,7 @@ const TableList: React.FC<{}> = () => {
         </FooterToolbar>
       )}
       <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
-        <ProTable<TableListItem, TableListItem>
+        <ProTable<DeviceItem, DeviceItem>
           onSubmit={async (value) => {
             const success = await handleAdd(value);
             if (success) {
@@ -215,7 +193,7 @@ const TableList: React.FC<{}> = () => {
       </CreateForm>
 
       <UpdateForm onCancel={() => handleUpdateModalVisible(false)} modalVisible={updateModalVisible}>
-        <ProTable<TableListItem, TableListItem>
+        <ProTable<DeviceItem, DeviceItem>
           onSubmit={async (value) => {
             const success = await handleUpdate(value);
             if (success) {

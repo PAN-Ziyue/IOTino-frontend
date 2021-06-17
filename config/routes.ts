@@ -50,7 +50,7 @@
                 ],
               },
               {
-                name: 'list.table-list',
+                name: 'list.device',
                 icon: 'table',
                 path: '/list',
                 component: './TableList',

@@ -1,4 +1,4 @@
-export interface TableListItem {
+export interface DeviceItem {
   key: number;
   disabled?: boolean;
   href: string;
@@ -20,11 +20,11 @@ export interface TableListPagination {
 }
 
 export interface TableListData {
-  list: TableListItem[];
+  list: DeviceItem[];
   pagination: Partial<TableListPagination>;
 }
 
-export interface TableListParams {
+export interface DeviceParams {
   status?: string;
   name?: string;
   desc?: string;
