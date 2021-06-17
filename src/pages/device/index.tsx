@@ -1,6 +1,7 @@
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, message, Divider, Form, Input, } from 'antd';
 import React, { useState, useRef } from 'react';
+import {FormattedMessage, useIntl} from 'umi';
 import { GridContent } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
@@ -42,11 +43,8 @@ const handleUpdate = async (fields: DeviceItem) => {
   }
 };
 
-/**
- * 删除节点
- *
- * @param selectedRows
- */
+
+
 const handleRemove = async (fields: DeviceItem) => {
   const hide = message.loading('正在删除');
   try {
@@ -62,14 +60,16 @@ const handleRemove = async (fields: DeviceItem) => {
   }
 };
 
-const TableList: React.FC<{}> = () => {
+const TableList: React.FC = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
   const [updateDeviceValues, setUpdateDeviceValues] = useState<DeviceItem>();
   const actionRef = useRef<ActionType>();
+  const intl = useIntl();
+
   const columns: ProColumns<DeviceItem>[] = [
     {
-      title: '设备ID',
+      title: intl.formatMessage({id: 'device.table.device'}),
       dataIndex: 'device',
 
       formItemProps: {
@@ -82,7 +82,7 @@ const TableList: React.FC<{}> = () => {
       },
     },
     {
-      title: '设备名称',
+      title: intl.formatMessage({id: 'device.table.name'}),
       dataIndex: 'name',
 
       formItemProps: {
@@ -129,10 +129,11 @@ const TableList: React.FC<{}> = () => {
     },
   ];
 
+
   return (
     <GridContent>
       <ProTable<DeviceItem>
-        headerTitle="查询表格"
+        headerTitle={intl.formatMessage({id: 'device.title'})}
         actionRef={actionRef}
         rowKey="key"
         search={false}
@@ -140,7 +141,8 @@ const TableList: React.FC<{}> = () => {
         pagination={false}
         toolBarRender={() => [
           <Button type="primary" onClick={() => handleModalVisible(true)}>
-            <PlusOutlined /> 新建
+            <PlusOutlined />
+            <FormattedMessage id="device.new"/>
           </Button>,
         ]}
         request={(params) => queryDevice({ ...params })}
