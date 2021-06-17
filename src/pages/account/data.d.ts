@@ -25,11 +25,10 @@ export interface NoticeType {
 }
 
 export interface CurrentUser {
+  email: string;
   name: string;
-  avatar: string;
   account: string;
   notice: NoticeType[];
-  email: string;
   signature: string;
   title: string;
   group: string;

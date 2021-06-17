@@ -1,6 +1,6 @@
 import type { Effect, Reducer } from 'umi';
 import type { CurrentUser, GeographicItemType } from './data.d';
-import { queryCurrent, query as queryUsers } from './service';
+import { queryCurrent } from './service';
 
 export interface ModalState {
   currentUser?: Partial<CurrentUser>;
@@ -14,7 +14,6 @@ export interface ModelType {
   state: ModalState;
   effects: {
     fetchCurrent: Effect;
-    fetch: Effect;
   };
   reducers: {
     saveCurrentUser: Reducer<ModalState>;
@@ -36,13 +35,6 @@ const Model: ModelType = {
   },
 
   effects: {
-    *fetch(_, { call, put }) {
-      const response = yield call(queryUsers);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
-    },
     *fetchCurrent(_, { call, put }) {
       const response = yield call(queryCurrent);
       yield put({

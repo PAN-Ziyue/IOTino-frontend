@@ -1,13 +1,13 @@
 import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Divider, Input } from 'antd';
+import { Button, message, Divider, Form, Input, } from 'antd';
 import React, { useState, useRef } from 'react';
-import { GridContent, FooterToolbar } from '@ant-design/pro-layout';
+import { GridContent } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
 import type { DeviceItem } from '@/models/device';
-import { queryDevice, updateRule, addRule, removeRule } from '@/services/device';
+import { queryDevice, updateRule, addDevice, removeRule } from '@/services/device';
 
 /**
  * 添加节点
@@ -17,9 +17,8 @@ import { queryDevice, updateRule, addRule, removeRule } from '@/services/device'
 const handleAdd = async (fields: DeviceItem) => {
   const hide = message.loading('正在添加');
   try {
-    await addRule({ ...fields });
+    await addDevice({ ...fields });
     hide();
-    message.success('添加成功');
     return true;
   } catch (error) {
     hide();
@@ -37,13 +36,10 @@ const handleUpdate = async (fields: DeviceItem) => {
   const hide = message.loading('正在配置');
   try {
     await updateRule({
+      device: fields.device,
       name: fields.name,
-      desc: fields.desc,
-      key: fields.key,
     });
     hide();
-
-    message.success('配置成功');
     return true;
   } catch (error) {
     hide();
@@ -57,15 +53,13 @@ const handleUpdate = async (fields: DeviceItem) => {
  *
  * @param selectedRows
  */
-const handleRemove = async (selectedRows: DeviceItem[]) => {
+const handleRemove = async (fields: DeviceItem) => {
   const hide = message.loading('正在删除');
-  if (!selectedRows) return true;
   try {
     await removeRule({
-      key: selectedRows.map((row) => row.key),
+      device: fields.device,
     });
     hide();
-    message.success('删除成功，即将刷新');
     return true;
   } catch (error) {
     hide();
@@ -77,8 +71,8 @@ const handleRemove = async (selectedRows: DeviceItem[]) => {
 const TableList: React.FC<{}> = () => {
   const [createModalVisible, handleModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
+  const [updateDeviceValues, setUpdateDeviceValues] = useState<DeviceItem>();
   const actionRef = useRef<ActionType>();
-  const [selectedRowsState, setSelectedRows] = useState<DeviceItem[]>([]);
   const columns: ProColumns<DeviceItem>[] = [
     {
       title: '设备ID',
@@ -129,9 +123,15 @@ const TableList: React.FC<{}> = () => {
       render: (_, record) => [
         <a onClick={() => {
           handleUpdateModalVisible(true);
+          setUpdateDeviceValues(record);
         }}> 配置 </a>,
-      <Divider type="vertical" />,
-        <a href="" style={{color: "red"}}>删除</a>,
+        <Divider type="vertical" />,
+        <a onClick={() => {
+          handleRemove(record);
+          if (actionRef.current) {
+            actionRef.current.reload();
+          }
+        }} style={{ color: "red" }}>删除</a>,
       ],
     },
   ];
@@ -152,29 +152,8 @@ const TableList: React.FC<{}> = () => {
         ]}
         request={(params) => queryDevice({ ...params })}
         columns={columns}
-        rowSelection={{
-          onChange: (_, selectedRows) => setSelectedRows(selectedRows),
-        }}
+        rowSelection={false}
       />
-      {selectedRowsState?.length > 0 && (
-        <FooterToolbar
-          extra={
-            <div>
-              已选择 <a style={{ fontWeight: 600 }}>{selectedRowsState.length}</a> 项
-            </div>
-          }
-        >
-          <Button danger
-            onClick={async () => {
-              await handleRemove(selectedRowsState);
-              setSelectedRows([]);
-              actionRef.current?.reloadAndRest?.();
-            }}
-          >
-            批量删除
-          </Button>
-        </FooterToolbar>
-      )}
       <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
         <ProTable<DeviceItem, DeviceItem>
           onSubmit={async (value) => {
@@ -191,22 +170,35 @@ const TableList: React.FC<{}> = () => {
           columns={columns}
         />
       </CreateForm>
-
       <UpdateForm onCancel={() => handleUpdateModalVisible(false)} modalVisible={updateModalVisible}>
-        <ProTable<DeviceItem, DeviceItem>
-          onSubmit={async (value) => {
-            const success = await handleUpdate(value);
-            if (success) {
-              handleModalVisible(false);
-              if (actionRef.current) {
-                actionRef.current.reload();
+        <Form
+          layout="vertical"
+          onFinish={
+            async (value) => {
+              const success = await handleUpdate(value);
+              if (success) {
+                handleModalVisible(false);
+                if (actionRef.current) {
+                  actionRef.current.reload();
+                }
               }
-            }
-          }}
-          rowKey="key"
-          type="form"
-          columns={columns}
-        />
+            }}
+          initialValues={{
+            device: updateDeviceValues?.device,
+            name: updateDeviceValues?.name
+          }}>
+          <Form.Item name="device" label="设备ID" rules={[{ required: true }]}>
+            <Input readOnly />
+          </Form.Item>
+          <Form.Item name="name" label="设备名称" rules={[{ required: true }]}>
+            <Input />
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
       </UpdateForm>
     </GridContent>
   );

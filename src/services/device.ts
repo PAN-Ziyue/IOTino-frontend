@@ -7,8 +7,8 @@ export async function queryDevice(params?: DeviceParams) {
   });
 }
 
-export async function removeRule(params: { key: number[] }) {
-  return request('/api/device', {
+export async function removeRule(params?: DeviceParams) {
+  return request('/api/devices', {
     method: 'DELETE',
     data: {
       ...params,
@@ -16,18 +16,17 @@ export async function removeRule(params: { key: number[] }) {
   });
 }
 
-export async function addRule(params: DeviceParams) {
-  return request('/api/device', {
+export async function addDevice(params: DeviceParams) {
+  return request('/api/devices', {
     method: 'POST',
     data: {
       ...params,
-      method: 'post',
     },
   });
 }
 
 export async function updateRule(params: DeviceParams) {
-  return request('/api/device', {
+  return request('/api/devices', {
     method: 'PUT',
     data: {
       ...params,

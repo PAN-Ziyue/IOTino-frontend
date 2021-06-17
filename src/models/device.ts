@@ -1,4 +1,5 @@
 export interface DeviceItem {
+  device: string;
   key: number;
   disabled?: boolean;
   href: string;
@@ -25,6 +26,7 @@ export interface TableListData {
 }
 
 export interface DeviceParams {
+  device?: string;
   status?: string;
   name?: string;
   desc?: string;

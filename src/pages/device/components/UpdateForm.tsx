@@ -1,10 +1,12 @@
 import React from 'react';
 import { Modal } from 'antd';
 
+
 interface UpdateFormProps {
   modalVisible: boolean;
   onCancel: () => void;
 }
+
 
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
   const { modalVisible, onCancel } = props;

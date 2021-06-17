@@ -2,7 +2,7 @@ import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons
 import { Avatar, Menu } from 'antd';
 import React from 'react';
 import type { ConnectProps } from 'umi';
-import { history, connect } from 'umi';
+import { history, connect, NavLink } from 'umi';
 import type { ConnectState } from '@/models/connect';
 import type { CurrentUser } from '@/models/user';
 import HeaderDropdown from '../HeaderDropdown';
@@ -42,28 +42,26 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]}>
         {menu && (
-          <Menu.Item key="center">
-            <UserOutlined />
-            个人中心
-          </Menu.Item>
-        )}
-        {menu && (
-          <Menu.Item key="settings">
-            <SettingOutlined />
-            个人设置
+          <Menu.Item key="settings" >
+            <NavLink to="/manage/account">
+              <SettingOutlined />
+              个人设置
+            </NavLink>
           </Menu.Item>
         )}
         {menu && <Menu.Divider />}
         <Menu.Item key="logout">
-          <LogoutOutlined />
-          退出登录
+          <NavLink to="/user/login">
+            <LogoutOutlined />
+            退出登录
+          </NavLink>
         </Menu.Item>
       </Menu>
     );
-    return  (
+    return (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} icon={<UserOutlined/>}/>
+          <Avatar size="small" className={styles.avatar} icon={<UserOutlined />} />
         </span>
       </HeaderDropdown>
     );

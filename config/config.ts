@@ -55,52 +55,6 @@ export default defineConfig({
           icon: 'smile',
           component: './device',
         },
-        {
-          path: '/profile',
-          name: 'profile',
-          icon: 'profile',
-          routes: [
-            {
-              path: '/',
-              redirect: '/profile/basic',
-            },
-            {
-              name: 'basic',
-              icon: 'smile',
-              path: '/profile/basic',
-              component: './profile/basic',
-            },
-            {
-              name: 'advanced',
-              icon: 'smile',
-              path: '/profile/advanced',
-              component: './profile/advanced',
-            },
-          ],
-        },
-        {
-          name: 'result',
-          icon: 'CheckCircleOutlined',
-          path: '/result',
-          routes: [
-            {
-              path: '/',
-              redirect: '/result/success',
-            },
-            {
-              name: 'success',
-              icon: 'smile',
-              path: '/result/success',
-              component: './result/success',
-            },
-            {
-              name: 'fail',
-              icon: 'smile',
-              path: '/result/fail',
-              component: './result/fail',
-            },
-          ],
-        },
         { name: 'account', icon: 'user', component: './account', path: '/manage/account' },
         {
           component: '404',

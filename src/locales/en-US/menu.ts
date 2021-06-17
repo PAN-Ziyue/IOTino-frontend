@@ -41,7 +41,6 @@ export default {
   'menu.exception.server-error': '500',
   'menu.exception.trigger': 'Trigger',
   'menu.account': 'Account',
-  'menu.account.center': 'Account Center',
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
