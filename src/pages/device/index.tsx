@@ -1,23 +1,22 @@
-import { PlusOutlined } from '@ant-design/icons';
-import { Button, message, Divider, Form, Input, } from 'antd';
-import React, { useState, useRef } from 'react';
+import {PlusOutlined} from '@ant-design/icons';
+import {Button, message, Divider, Form, Input,} from 'antd';
+import React, {useState, useRef} from 'react';
 import {FormattedMessage, useIntl} from 'umi';
-import { GridContent } from '@ant-design/pro-layout';
-import type { ProColumns, ActionType } from '@ant-design/pro-table';
+import {GridContent} from '@ant-design/pro-layout';
+import type {ProColumns, ActionType} from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
 
 
-
-import { queryDevice, updateRule, addDevice, removeRule } from '@/services/device';
+import {queryDevice, updateRule, addDevice, removeRule} from '@/services/device';
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
-import type { DeviceItem } from '@/models/device';
+import type {DeviceItem} from '@/models/device';
 
 
 const handleAdd = async (fields: DeviceItem) => {
   const hide = message.loading('正在添加');
   try {
-    await addDevice({ ...fields });
+    await addDevice({...fields});
     hide();
     return true;
   } catch (error) {
@@ -44,7 +43,6 @@ const handleUpdate = async (fields: DeviceItem) => {
 };
 
 
-
 const handleRemove = async (fields: DeviceItem) => {
   const hide = message.loading('正在删除');
   try {
@@ -69,7 +67,7 @@ const TableList: React.FC = () => {
 
   const columns: ProColumns<DeviceItem>[] = [
     {
-      title: intl.formatMessage({id: 'device.table.device'}),
+      title: <FormattedMessage id="device.table.device"/>,
       dataIndex: 'device',
 
       formItemProps: {
@@ -104,9 +102,9 @@ const TableList: React.FC = () => {
       dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
-        'offline': { text: '离线', status: 'Default' },
-        'normal': { text: '正常', status: 'Success' },
-        'alert': { text: '告警', status: 'Error' },
+        'offline': {text: '离线', status: 'Default'},
+        'normal': {text: '正常', status: 'Success'},
+        'alert': {text: '告警', status: 'Error'},
       },
     },
     {
@@ -118,13 +116,13 @@ const TableList: React.FC = () => {
           handleUpdateModalVisible(true);
           setUpdateDeviceValues(record);
         }}> 配置 </a>,
-        <Divider type="vertical" />,
+        <Divider type="vertical"/>,
         <a onClick={() => {
           handleRemove(record);
           if (actionRef.current) {
             actionRef.current.reload();
           }
-        }} style={{ color: "red" }}>删除</a>,
+        }} style={{color: "red"}}>删除</a>,
       ],
     },
   ];
@@ -141,11 +139,11 @@ const TableList: React.FC = () => {
         pagination={false}
         toolBarRender={() => [
           <Button type="primary" onClick={() => handleModalVisible(true)}>
-            <PlusOutlined />
+            <PlusOutlined/>
             <FormattedMessage id="device.new"/>
           </Button>,
         ]}
-        request={(params) => queryDevice({ ...params })}
+        request={(params) => queryDevice({...params})}
         columns={columns}
         rowSelection={false}
       />
@@ -182,11 +180,11 @@ const TableList: React.FC = () => {
             device: updateDeviceValues?.device,
             name: updateDeviceValues?.name
           }}>
-          <Form.Item name="device" label="设备ID" rules={[{ required: true }]}>
-            <Input readOnly />
+          <Form.Item name="device" label="设备ID" rules={[{required: true}]}>
+            <Input readOnly/>
           </Form.Item>
-          <Form.Item name="name" label="设备名称" rules={[{ required: true }]}>
-            <Input />
+          <Form.Item name="name" label="设备名称" rules={[{required: true}]}>
+            <Input/>
           </Form.Item>
           <Form.Item>
             <Button type="primary" htmlType="submit">

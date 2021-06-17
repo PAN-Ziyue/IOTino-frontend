@@ -5,4 +5,5 @@ export default {
   'dashboard.data-detail': '数据明细',
   'dashboard.data-detail.count': '信息量',
   'dashboard.data-detail.rank': '排名',
+  'dashboard.trace': '设备定位',
 }

@@ -19,28 +19,26 @@ export interface DetailDataType {
   y: number;
 }
 
+export interface LocationDataType {
+  name: string;
+  longitude: number;
+  latitude: number;
+}
+
 export interface DashboardData {
   total: number,
   online: number,
   count: number,
   chartData: DetailDataType[],
+  locationData: LocationDataType[],
 }
 
 const initState = {
   total: 0,
   online: 0,
   count: 0,
-  chartData: []
-  // visitData: [],
-  // visitData2: [],
-  // salesData: [],
-  // searchData: [],
-  // offlineData: [],
-  // offlineChartData: [],
-  // salesTypeData: [],
-  // salesTypeDataOnline: [],
-  // salesTypeDataOffline: [],
-  // radarData: [],
+  chartData: [],
+  locationData: [],
 };
 
 const Model: ModelType = {

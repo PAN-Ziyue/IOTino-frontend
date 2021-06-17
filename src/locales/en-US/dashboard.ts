@@ -5,4 +5,5 @@ export default {
   'dashboard.data-detail': 'Data Details',
   'dashboard.data-detail.count': 'Count',
   'dashboard.data-detail.rank': 'Rank',
+  'dashboard.trace': 'Trace',
 }

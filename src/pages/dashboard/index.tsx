@@ -7,6 +7,7 @@ import type { DashboardData } from '@/models/dashboard';
 
 import BasicData from './components/BasicData';
 import DataDetail from './components/DataDetail';
+import Location from './components/Location';
 
 
 interface AnalysisProps {
@@ -45,6 +46,7 @@ class Analysis extends Component<AnalysisProps> {
       online,
       count,
       chartData,
+      locationData,
     } = dashboardData;
 
     return (
@@ -58,6 +60,10 @@ class Analysis extends Component<AnalysisProps> {
           <DataDetail
             chartData={chartData}
             loading={loading}
+          />
+          <Location
+            loading={loading}
+            locationData={locationData}
           />
         </React.Fragment>
       </GridContent>
