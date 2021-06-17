@@ -13,17 +13,14 @@ const topColResponsiveProps = {
   style: { marginBottom: 24 },
 };
 
-const IntroduceRow = ({ loading, total, online }:
-  { loading: boolean; total: number, online: number }) => (
+const BasicData = ({ loading, total, online, count }:
+  { loading: boolean; total: number, online: number, count: number }) => (
   <Row gutter={24}>
     <Col {...topColResponsiveProps}>
       <ChartCard
         bordered={false}
         title={
-          <FormattedMessage
-            id="dashboardandanalysis.analysis.total-devices"
-            defaultMessage="Total Devices"
-          />
+          <FormattedMessage id="dashboard.total-devices"/>
         }
         loading={loading}
         total={total}
@@ -36,10 +33,7 @@ const IntroduceRow = ({ loading, total, online }:
       <ChartCard
         bordered={false}
         title={
-          <FormattedMessage
-            id="dashboardandanalysis.analysis.total-devices"
-            defaultMessage="Total Devices"
-          />
+          <FormattedMessage id="dashboard.total-online"/>
         }
         loading={loading}
         total={online}
@@ -47,7 +41,20 @@ const IntroduceRow = ({ loading, total, online }:
       >
       </ChartCard>
     </Col>
+
+    <Col {...topColResponsiveProps}>
+      <ChartCard
+        bordered={false}
+        title={
+          <FormattedMessage id="dashboard.total-data"/>
+        }
+        loading={loading}
+        total={count}
+        contentHeight={46}
+      >
+      </ChartCard>
+    </Col>
   </Row>
 );
 
-export default IntroduceRow;
+export default BasicData;

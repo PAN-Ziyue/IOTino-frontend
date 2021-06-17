@@ -17,6 +17,7 @@ export interface ModelType {
 export interface DashboardData {
   total: number,
   online: number,
+  count: number,
   
   // visitData: VisitDataType[];
   // visitData2: VisitDataType[];
@@ -33,6 +34,7 @@ export interface DashboardData {
 const initState = {
   total: 0,
   online: 0,
+  count: 0,
   // visitData: [],
   // visitData2: [],
   // salesData: [],

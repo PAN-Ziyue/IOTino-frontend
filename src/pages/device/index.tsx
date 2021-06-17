@@ -4,16 +4,15 @@ import React, { useState, useRef } from 'react';
 import { GridContent } from '@ant-design/pro-layout';
 import type { ProColumns, ActionType } from '@ant-design/pro-table';
 import ProTable from '@ant-design/pro-table';
+
+
+
+import { queryDevice, updateRule, addDevice, removeRule } from '@/services/device';
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
 import type { DeviceItem } from '@/models/device';
-import { queryDevice, updateRule, addDevice, removeRule } from '@/services/device';
 
-/**
- * 添加节点
- *
- * @param fields
- */
+
 const handleAdd = async (fields: DeviceItem) => {
   const hide = message.loading('正在添加');
   try {
@@ -27,11 +26,6 @@ const handleAdd = async (fields: DeviceItem) => {
   }
 };
 
-/**
- * 更新节点
- *
- * @param fields
- */
 const handleUpdate = async (fields: DeviceItem) => {
   const hide = message.loading('正在配置');
   try {
@@ -110,10 +104,9 @@ const TableList: React.FC<{}> = () => {
       dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
-        0: { text: '关闭', status: 'Default' },
-        1: { text: '运行中', status: 'Processing' },
-        2: { text: '已上线', status: 'Success' },
-        3: { text: '异常', status: 'Error' },
+        'offline': { text: '离线', status: 'Default' },
+        'normal': { text: '正常', status: 'Success' },
+        'alert': { text: '告警', status: 'Error' },
       },
     },
     {

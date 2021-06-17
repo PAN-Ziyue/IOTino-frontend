@@ -2,9 +2,9 @@ import component from './en-US/component';
 import globalHeader from './en-US/globalHeader';
 import menu from './en-US/menu';
 import pwa from './en-US/pwa';
-import settingDrawer from './en-US/settingDrawer';
 import settings from './en-US/settings';
 import pages from './en-US/pages';
+import dashboard from './en-US/dashboard';
 
 export default {
   'navBar.lang': 'Languages',
@@ -16,9 +16,9 @@ export default {
   'app.welcome.link.block-list': 'Quickly build standard, pages based on `block` development',
   ...globalHeader,
   ...menu,
-  ...settingDrawer,
   ...settings,
   ...pwa,
   ...component,
   ...pages,
+  ...dashboard,
 };

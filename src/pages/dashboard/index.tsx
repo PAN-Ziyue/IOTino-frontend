@@ -9,8 +9,8 @@ import { connect } from 'umi';
 import { getTimeDistance } from './utils/utils';
 import type { DashboardData } from '@/models/dashboard';
 
-import IntroduceRow from './components/IntroduceRow';
-import SalesCard from './components/SalesCard';
+import BasicData from './components/BasicData';
+import DataDetail from './components/DataDetail';
 
 type RangePickerValue = RangePickerProps<moment.Moment>['value'];
 
@@ -34,7 +34,6 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
   };
 
   reqRef: number = 0;
-
   timeoutId: number = 0;
 
   componentDidMount() {
@@ -68,17 +67,19 @@ class Analysis extends Component<AnalysisProps, AnalysisState> {
     const {
       total,
       online,
+      count,
       salesData,
     } = dashboardAndanalysis;
 
     return (
       <GridContent>
         <React.Fragment>
-          <IntroduceRow 
-            loading={loading} 
-            total={total} 
-            online={online}/>
-          <SalesCard
+          <BasicData
+            loading={loading}
+            total={total}
+            online={online}
+            count={count}/>
+          <DataDetail
             rangePickerValue={rangePickerValue}
             salesData={salesData}
             loading={loading}
