@@ -80,7 +80,7 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: intl.formatMessage({id: 'device.table.name'}),
+      title: <FormattedMessage id="device.table.name"/>,
       dataIndex: 'name',
 
       formItemProps: {
@@ -93,36 +93,49 @@ const TableList: React.FC = () => {
       },
     },
     {
-      title: '数据量',
+      title: <FormattedMessage id="device.table.data"/>,
       dataIndex: 'count',
       hideInForm: true,
     },
     {
-      title: '状态',
+      title: <FormattedMessage id="device.table.status"/>,
       dataIndex: 'status',
       hideInForm: true,
       valueEnum: {
-        'offline': {text: '离线', status: 'Default'},
-        'normal': {text: '正常', status: 'Success'},
-        'alert': {text: '告警', status: 'Error'},
+        'offline': {
+          text: <FormattedMessage id="device.status.offline"/>,
+          status: 'Default'
+        },
+        'normal': {
+          text: <FormattedMessage id="device.status.normal"/>,
+          status: 'Success'
+        },
+        'alert': {
+          text: <FormattedMessage id="device.status.alert"/>,
+          status: 'Error'
+        },
       },
     },
     {
-      title: '操作',
+      title: <FormattedMessage id="device.table.operation"/>,
       dataIndex: 'option',
       valueType: 'option',
       render: (_, record) => [
         <a onClick={() => {
           handleUpdateModalVisible(true);
           setUpdateDeviceValues(record);
-        }}> 配置 </a>,
+        }}>
+          <FormattedMessage id="device.edit"/>
+        </a>,
         <Divider type="vertical"/>,
         <a onClick={() => {
           handleRemove(record);
           if (actionRef.current) {
             actionRef.current.reload();
           }
-        }} style={{color: "red"}}>删除</a>,
+        }} style={{color: "red"}}>
+          <FormattedMessage id="device.delete"/>
+        </a>,
       ],
     },
   ];

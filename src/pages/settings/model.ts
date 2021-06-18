@@ -1,11 +1,9 @@
 import type { Effect, Reducer } from 'umi';
-import type { CurrentUser, GeographicItemType } from './data.d';
+import type { CurrentUser } from './data.d';
 import { queryCurrent } from './service';
 
 export interface ModalState {
   currentUser?: Partial<CurrentUser>;
-  province?: GeographicItemType[];
-  city?: GeographicItemType[];
   isLoading?: boolean;
 }
 
@@ -25,12 +23,10 @@ export interface ModelType {
 }
 
 const Model: ModelType = {
-  namespace: 'accountAndsettings',
+  namespace: 'settings',
 
   state: {
     currentUser: {},
-    province: [],
-    city: [],
     isLoading: false,
   },
 

@@ -3,15 +3,6 @@ export interface TagType {
   label: string;
 }
 
-export interface GeographicItemType {
-  name: string;
-  id: string;
-}
-
-export interface GeographicType {
-  province: GeographicItemType;
-  city: GeographicItemType;
-}
 
 export interface NoticeType {
   id: string;

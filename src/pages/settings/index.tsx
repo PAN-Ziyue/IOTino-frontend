@@ -44,7 +44,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch({
-      type: 'accountAndsettings/fetchCurrent',
+      type: 'settings/fetchCurrent',
     });
     window.addEventListener('resize', this.resize);
     this.resize();
@@ -153,7 +153,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
 }
 
 export default connect(
-  ({ accountAndsettings }: { accountAndsettings: { currentUser: CurrentUser } }) => ({
-    currentUser: accountAndsettings.currentUser,
+  ({ settings }: { settings: { currentUser: CurrentUser } }) => ({
+    currentUser: settings.currentUser,
   }),
 )(Settings);

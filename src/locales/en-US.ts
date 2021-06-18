@@ -2,7 +2,6 @@ import component from './en-US/component';
 import globalHeader from './en-US/globalHeader';
 import menu from './en-US/menu';
 import pwa from './en-US/pwa';
-import settings from './en-US/settings';
 import pages from './en-US/pages';
 import dashboard from './en-US/dashboard';
 import device from './en-US/device';
@@ -17,7 +16,6 @@ export default {
   'app.welcome.link.block-list': 'Quickly build standard, pages based on `block` development',
   ...globalHeader,
   ...menu,
-  ...settings,
   ...pwa,
   ...component,
   ...pages,

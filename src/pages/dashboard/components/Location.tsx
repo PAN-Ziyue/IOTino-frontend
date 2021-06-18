@@ -75,7 +75,7 @@ const Location = ({loading, locationData}: {
           center: [120.12, 30.38],
           pitch: 0,
           style: 'light',
-          zoom: 10.5,
+          zoom: 10,
         }}
         style={{
           height: Math.max(480, window.innerWidth / 3)

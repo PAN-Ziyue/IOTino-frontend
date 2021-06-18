@@ -55,7 +55,7 @@ export default defineConfig({
           icon: 'smile',
           component: './device',
         },
-        { name: 'account', icon: 'user', component: './account', path: '/manage/account' },
+        { name: 'settings', icon: 'user', component: './settings', path: '/manage/settings' },
         {
           component: '404',
         },
