@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal } from 'antd';
+import {Modal} from 'antd';
+import {FormattedMessage} from "umi";
 
 interface CreateFormProps {
   modalVisible: boolean;
@@ -7,12 +8,12 @@ interface CreateFormProps {
 }
 
 const CreateForm: React.FC<CreateFormProps> = (props) => {
-  const { modalVisible, onCancel } = props;
+  const {modalVisible, onCancel} = props;
 
   return (
     <Modal
       destroyOnClose
-      title="新建设备"
+      title={<FormattedMessage id="device.new.title"/>}
       visible={modalVisible}
       onCancel={() => onCancel()}
       footer={null}

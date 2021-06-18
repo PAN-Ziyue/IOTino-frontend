@@ -1,12 +1,12 @@
-import { GridContent } from '@ant-design/pro-layout';
-import React, { Component } from 'react';
-import { Input, Form, Button, message } from 'antd';
+import {GridContent} from '@ant-design/pro-layout';
+import React, {Component} from 'react';
+import {Input, Form, Button, message} from 'antd';
 
-import type { Dispatch } from 'umi';
-import { FormattedMessage, formatMessage } from 'umi';
-import { connect } from 'umi';
-import type { CurrentUser } from '@/models/user';
-import { updateUser } from '@/services/user';
+import type {Dispatch} from 'umi';
+import {FormattedMessage} from 'umi';
+import {connect} from 'umi';
+import type {CurrentUser} from '@/models/user';
+import {updateUser} from '@/services/user';
 
 
 interface SettingsProps {
@@ -26,10 +26,13 @@ const handleUpdate = async (value: CurrentUser) => {
       email: value.email,
     })
     message.success('success')
+    return true;
   } catch (error) {
     message.error('error')
+    return false;
   }
 }
+
 
 class Settings extends Component<SettingsProps, SettingsState> {
   main: HTMLDivElement | undefined = undefined;
@@ -41,8 +44,9 @@ class Settings extends Component<SettingsProps, SettingsState> {
     };
   }
 
+
   componentDidMount() {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch({
       type: 'settings/fetchCurrent',
     });
@@ -63,7 +67,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
         return;
       }
       let mode: 'inline' | 'horizontal' = 'inline';
-      const { offsetWidth } = this.main;
+      const {offsetWidth} = this.main;
       if (this.main.offsetWidth < 641 && offsetWidth > 400) {
         mode = 'horizontal';
       }
@@ -75,13 +79,6 @@ class Settings extends Component<SettingsProps, SettingsState> {
       });
     });
   };
-
-  handleFinish = () => {
-
-    message.success(formatMessage({ id: 'accountandsettings.basic.update.success' }));
-  };
-
-
 
 
   render() {
@@ -110,35 +107,32 @@ class Settings extends Component<SettingsProps, SettingsState> {
         >
           <Form.Item
             name="email"
-            tooltip="不可修改"
-            label={formatMessage({ id: 'accountandsettings.basic.email' })}
+            tooltip={<FormattedMessage id="settings.email.tip"/>}
+            label={<FormattedMessage id="settings.email"/>}
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'accountandsettings.basic.email-message' }),
+                message: <FormattedMessage id="settings.email.required"/>,
               },
             ]}
           >
-            <Input readOnly />
+            <Input readOnly/>
           </Form.Item>
           <Form.Item
             name="account"
-            label={formatMessage({ id: 'accountandsettings.basic.nickname' })}
+            label={<FormattedMessage id="settings.name"/>}
             rules={[
               {
                 required: true,
-                message: formatMessage({ id: 'accountandsettings.basic.nickname-message' }),
+                message: <FormattedMessage id="settings.name.required"/>,
               },
             ]}
           >
-            <Input />
+            <Input/>
           </Form.Item>
           <Form.Item>
             <Button htmlType="submit" type="primary">
-              <FormattedMessage
-                id="accountandsettings.basic.update"
-                defaultMessage="Update Information"
-              />
+              <FormattedMessage id="settings.update"/>
             </Button>
           </Form.Item>
           <Form.Item>
@@ -153,7 +147,7 @@ class Settings extends Component<SettingsProps, SettingsState> {
 }
 
 export default connect(
-  ({ settings }: { settings: { currentUser: CurrentUser } }) => ({
+  ({settings}: { settings: { currentUser: CurrentUser } }) => ({
     currentUser: settings.currentUser,
   }),
 )(Settings);

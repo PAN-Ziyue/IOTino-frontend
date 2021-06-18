@@ -1,7 +1,8 @@
-import { defineConfig } from 'umi';
+import {defineConfig} from 'umi';
 import defaultSettings from './defaultSettings';
 import proxy from './proxy';
-const { REACT_APP_ENV } = process.env;
+
+const {REACT_APP_ENV} = process.env;
 export default defineConfig({
   hash: true,
   antd: {},
@@ -26,40 +27,53 @@ export default defineConfig({
   },
   // umi routes: https://umijs.org/docs/routing
   routes: [
-    { path: '/', component: '../layouts/BlankLayout' },
+    {path: '/', component: '../layouts/BlankLayout'},
     {
       path: '/user',
       component: '../layouts/UserLayout',
       routes: [
-        { name: 'login', path: '/user/login', component: './User/login' },
-        { name: 'register-result', icon: 'smile', path: '/user/register-result', component: './User/register-result' },
-        { name: 'register', icon: 'smile', path: '/user/register', component: './User/register' },
-        { component: '404' },
+        {name: 'login', path: '/user/login', component: './User/login'},
+        {name: 'register-result', icon: 'smile', path: '/user/register-result', component: './User/register-result'},
+        {name: 'register', icon: 'smile', path: '/user/register', component: './User/register'},
+        {component: '404'},
       ],
     },
     {
       path: '/manage',
-      component: '../layouts/BasicLayout',
-      Routes: ['src/pages/Authorized'],
-      authority: ['admin', 'user'],
+      component: '../layouts/SecurityLayout',
       routes: [
         {
-          name: 'dashboard',
-          path: '/manage/dashboard',
-          icon: 'dashboard',
-          component: './dashboard',
-        },
-        {
-          name: 'device',
-          path: '/manage/list',
-          icon: 'smile',
-          component: './device',
-        },
-        { name: 'settings', icon: 'user', component: './settings', path: '/manage/settings' },
-        {
-          component: '404',
-        },
-      ],
+          path: '/',
+          component: '../layouts/BasicLayout',
+          authority: ['user'],
+          routes: [
+            {
+              name: 'dashboard',
+              path: '/manage/dashboard',
+              icon: 'dashboard',
+              component: './dashboard',
+            },
+            {
+              name: 'device',
+              path: '/manage/list',
+              icon: 'smile',
+              component: './device',
+            },
+            {
+              name: 'settings',
+              icon: 'setting',
+              component: './settings',
+              path: '/manage/settings'
+            },
+            {
+              component: '404',
+            },
+          ],
+        }
+      ]
+    },
+    {
+      component: '404',
     },
   ],
   // Theme for antd: https://ant.design/docs/react/customize-theme-cn

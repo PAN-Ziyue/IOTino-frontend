@@ -1,5 +1,5 @@
 export default {
-  'pages.layouts.userLayout.title': 'Ant Design 是西湖区最具影响力的 Web 设计规范',
+  'pages.layouts.userLayout.title': '老和山最好的物联网管理平台',
 
   // common
   'pages.email.placeholder': '邮箱',

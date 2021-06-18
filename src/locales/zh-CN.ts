@@ -5,6 +5,7 @@ import pwa from './zh-CN/pwa';
 import pages from './zh-CN/pages';
 import dashboard from './zh-CN/dashboard';
 import device from "./zh-CN/device";
+import settings from "./zh-CN/settings";
 
 export default {
   'navBar.lang': '语言',
@@ -21,4 +22,5 @@ export default {
   ...component,
   ...dashboard,
   ...device,
+  ...settings,
 };

@@ -1,11 +1,11 @@
-import { stringify } from 'querystring';
-import type { Reducer, Effect } from 'umi';
-import { history } from 'umi';
+import type {Reducer, Effect} from 'umi';
+import {history} from 'umi';
 
-import { fakeAccountLogin } from '@/services/login';
-import { setAuthority } from '@/utils/authority';
-import { getPageQuery } from '@/utils/utils';
-import { message } from 'antd';
+import {fakeAccountLogin, LogoutUser} from '@/services/login';
+import {setAuthority} from '@/utils/authority';
+import {getPageQuery} from '@/utils/utils';
+import {message} from 'antd';
+import {reloadAuthorized} from "@/utils/Authorized";
 
 export type StateType = {
   status?: 'ok' | 'error';
@@ -33,7 +33,7 @@ const Model: LoginModelType = {
   },
 
   effects: {
-    *login({ payload }, { call, put }) {
+    * login({payload}, {call, put}) {
       const response = yield call(fakeAccountLogin, payload);
       yield put({
         type: 'changeLoginStatus',
@@ -44,7 +44,8 @@ const Model: LoginModelType = {
         const urlParams = new URL(window.location.href);
         const params = getPageQuery();
         message.success('🎉 🎉 🎉  登录成功！');
-        let { redirect } = params as { redirect: string };
+
+        let {redirect} = params as { redirect: string };
         if (redirect) {
           const redirectUrlParams = new URL(redirect);
           if (redirectUrlParams.origin === urlParams.origin) {
@@ -61,22 +62,28 @@ const Model: LoginModelType = {
       }
     },
 
-    logout() {
-      const { redirect } = getPageQuery();
-      // Note: There may be security issues, please note
-      if (window.location.pathname !== '/user/login' && !redirect) {
-        history.replace({
-          pathname: '/user/login',
-          search: stringify({
-            redirect: window.location.href,
-          }),
-        });
+    async logout() {
+      const response = await LogoutUser();
+
+      if (response.status === 'ok') {
+        const {redirect} = getPageQuery();
+
+        reloadAuthorized();
+        // Note: There may be security issues, please note
+        if (window.location.pathname !== '/user/login' && !redirect) {
+          history.replace({
+            pathname: '/user/login',
+            // search: stringify({
+            //   redirect: window.location.href,
+            // }),
+          });
+        }
       }
     },
   },
 
   reducers: {
-    changeLoginStatus(state, { payload }) {
+    changeLoginStatus(state, {payload}) {
       setAuthority(payload.currentAuthority);
       return {
         ...state,

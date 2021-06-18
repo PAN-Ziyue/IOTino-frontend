@@ -50,6 +50,7 @@ const handleRemove = async (fields: DeviceItem) => {
       device: fields.device,
     });
     hide();
+    // message.success('删除失败，请重试');
     return true;
   } catch (error) {
     hide();
@@ -160,23 +161,50 @@ const TableList: React.FC = () => {
         columns={columns}
         rowSelection={false}
       />
-      <CreateForm onCancel={() => handleModalVisible(false)} modalVisible={createModalVisible}>
-        <ProTable<DeviceItem, DeviceItem>
-          onSubmit={async (value) => {
-            const success = await handleAdd(value);
-            if (success) {
-              handleModalVisible(false);
-              if (actionRef.current) {
-                actionRef.current.reload();
+      <CreateForm
+        onCancel={() => handleModalVisible(false)}
+        modalVisible={createModalVisible}>
+        <Form
+          layout="vertical"
+          onFinish={
+            async (value) => {
+              const success = await handleAdd(value);
+              if (success) {
+                handleModalVisible(false);
+                if (actionRef.current) {
+                  actionRef.current.reload();
+                }
               }
-            }
-          }}
-          rowKey="key"
-          type="form"
-          columns={columns}
-        />
+            }}>
+          <Form.Item
+            name="device"
+            label={<FormattedMessage id="device.table.device"/>}
+            rules={[{
+              required: true,
+              message: <FormattedMessage id="device.table.device.required"/>,
+            }]}>
+            <Input/>
+          </Form.Item>
+          <Form.Item
+            name="name"
+            label={<FormattedMessage id="device.table.name"/>}
+            rules={[{
+              required: true,
+              message: <FormattedMessage id="device.table.name.required"/>,
+            }]}>
+            <Input/>
+          </Form.Item>
+          <Form.Item>
+            <Button type="primary" htmlType="submit">
+              Submit
+            </Button>
+          </Form.Item>
+        </Form>
       </CreateForm>
-      <UpdateForm onCancel={() => handleUpdateModalVisible(false)} modalVisible={updateModalVisible}>
+
+      <UpdateForm
+        onCancel={() => handleUpdateModalVisible(false)}
+        modalVisible={updateModalVisible}>
         <Form
           layout="vertical"
           onFinish={
@@ -193,10 +221,23 @@ const TableList: React.FC = () => {
             device: updateDeviceValues?.device,
             name: updateDeviceValues?.name
           }}>
-          <Form.Item name="device" label="设备ID" rules={[{required: true}]}>
+          <Form.Item
+            name="device"
+            tooltip={<FormattedMessage id="device.table.device.tip"/>}
+            label={<FormattedMessage id="device.table.device"/>}
+            rules={[{
+              required: true,
+              message: <FormattedMessage id="device.table.device.required"/>,
+            }]}>
             <Input readOnly/>
           </Form.Item>
-          <Form.Item name="name" label="设备名称" rules={[{required: true}]}>
+          <Form.Item
+            name="name"
+            label={<FormattedMessage id="device.table.name"/>}
+            rules={[{
+              required: true,
+              message: <FormattedMessage id="device.table.name.required"/>,
+            }]}>
             <Input/>
           </Form.Item>
           <Form.Item>

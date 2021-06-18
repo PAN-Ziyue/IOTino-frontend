@@ -1,6 +1,6 @@
 export default {
   'pages.layouts.userLayout.title':
-    'Ant Design is the most influential web design specification in Xihu district',
+    'The best IOT device management platform on LaoHe Mountain',
 
   // common
   'pages.email.placeholder': 'Email',
@@ -83,7 +83,6 @@ export default {
   'pages.option.B': 'Colleague B',
   'pages.option.C': 'Colleague C',
   'pages.navBar.lang': 'Languages',
-
 
 
   // welcome

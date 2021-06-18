@@ -8,15 +8,15 @@ import type {
   BasicLayoutProps as ProLayoutProps,
   Settings,
 } from '@ant-design/pro-layout';
-import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef } from 'react';
-import type { Dispatch } from 'umi';
-import { Link, useIntl, connect, history } from 'umi';
-import { Result, Button } from 'antd';
+import ProLayout, {DefaultFooter} from '@ant-design/pro-layout';
+import React, {useEffect, useMemo, useRef} from 'react';
+import type {Dispatch} from 'umi';
+import {Link, useIntl, connect, history} from 'umi';
+import {Result, Button} from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
-import type { ConnectState } from '@/models/connect';
-import { getMatchMenu } from '@umijs/route-utils';
+import type {ConnectState} from '@/models/connect';
+import {getMatchMenu} from '@umijs/route-utils';
 import logo from '../assets/logo.svg';
 
 const noMatch = (
@@ -79,7 +79,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
     children,
     settings,
     location = {
-      pathname: '/',
+      pathname: '/manage/dashboard',
     },
   } = props;
   const menuDataRef = useRef<MenuDataItem[]>([]);
@@ -108,16 +108,17 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
       },
     [location.pathname],
   );
-  const { formatMessage } = useIntl();
+  const {formatMessage} = useIntl();
   return (
     <>
       <ProLayout
         logo={logo}
+        title={'IOTino'}
         formatMessage={formatMessage}
         {...props}
         {...settings}
         onCollapse={handleMenuCollapse}
-        onMenuHeaderClick={() => history.push('/')}
+        onMenuHeaderClick={() => history.push('/manage/dashboard')}
         menuItemRender={(menuItemProps, defaultDom) => {
           if (
             menuItemProps.isUrl ||
@@ -145,7 +146,7 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
           return null;
         }}
         menuDataRender={menuDataRender}
-        rightContentRender={() => <RightContent />}
+        rightContentRender={() => <RightContent/>}
         postMenuData={(menuData) => {
           menuDataRef.current = menuData || [];
           return menuData || [];
@@ -159,6 +160,6 @@ const BasicLayout: React.FC<BasicLayoutProps> = (props) => {
   );
 };
 
-export default connect(({ settings }: ConnectState) => ({
+export default connect(({settings}: ConnectState) => ({
   settings,
 }))(BasicLayout);
