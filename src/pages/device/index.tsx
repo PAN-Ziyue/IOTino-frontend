@@ -74,7 +74,7 @@ const TableList: React.FC = () => {
         rules: [
           {
             required: true,
-            message: '规则名称为必填项',
+            message: <FormattedMessage id="device.table.device.required"/>,
           },
         ],
       },
@@ -87,7 +87,7 @@ const TableList: React.FC = () => {
         rules: [
           {
             required: true,
-            message: '设备名称为必填项',
+            message: <FormattedMessage id="device.table.name.required"/>,
           },
         ],
       },
@@ -133,8 +133,8 @@ const TableList: React.FC = () => {
           <FormattedMessage id="device.edit"/>
         </a>,
         <Divider type="vertical"/>,
-        <a onClick={() => {
-          handleRemove(record);
+        <a onClick={async () => {
+          await handleRemove(record);
           if (actionRef.current) {
             actionRef.current.reload();
           }

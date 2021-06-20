@@ -32,7 +32,7 @@ const DataDetail = ({loading, chartData}: {
               <FormattedMessage id="dashboard.data-detail.rank"/>
             </h4>
             <ul className={styles.rankingList}>
-              {chartData.map((item, i) => (
+              {chartData && chartData.map((item, i) => (
                 <li key={item.x}>
                   <span className={`${styles.rankingItemNumber} ${i < 3 ? styles.active : ''}`}>
                     {i + 1}

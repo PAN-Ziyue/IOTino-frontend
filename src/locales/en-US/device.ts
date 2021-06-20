@@ -15,5 +15,5 @@ export default {
   'device.status.alert': 'Alert',
   'device.edit': 'Edit',
   'device.delete': 'Delete',
-  'device.table.device.tip': 'Device ID cannot be modified!'
+  'device.table.device.tip': 'Device ID cannot be modified!',
 }

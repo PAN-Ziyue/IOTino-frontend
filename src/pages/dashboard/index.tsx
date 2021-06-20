@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { GridContent } from '@ant-design/pro-layout';
-import type { Dispatch } from 'umi';
-import { connect } from 'umi';
+import React, {Component} from 'react';
+import {GridContent} from '@ant-design/pro-layout';
+import type {Dispatch} from 'umi';
+import {connect} from 'umi';
 
-import type { DashboardData } from '@/models/dashboard';
+import type {DashboardData} from '@/models/dashboard';
 
 import BasicData from './components/BasicData';
 import DataDetail from './components/DataDetail';
@@ -21,7 +21,7 @@ class Analysis extends Component<AnalysisProps> {
   timeoutId: number = 0;
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     this.reqRef = requestAnimationFrame(() => {
       dispatch({
         type: 'dashboardData/fetch',
@@ -30,7 +30,7 @@ class Analysis extends Component<AnalysisProps> {
   }
 
   componentWillUnmount() {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch({
       type: 'dashboardData/clear',
     });
@@ -40,7 +40,7 @@ class Analysis extends Component<AnalysisProps> {
 
 
   render() {
-    const { dashboardData, loading } = this.props;
+    const {dashboardData, loading} = this.props;
     const {
       total,
       online,
@@ -57,14 +57,18 @@ class Analysis extends Component<AnalysisProps> {
             total={total}
             online={online}
             count={count}/>
-          <DataDetail
-            chartData={chartData}
-            loading={loading}
-          />
-          <Location
-            loading={loading}
-            locationData={locationData}
-          />
+          {chartData && (
+            <DataDetail
+              chartData={chartData}
+              loading={loading}
+            />
+          )}
+          {locationData && (
+            <Location
+              loading={loading}
+              locationData={locationData}
+            />
+          )}
         </React.Fragment>
       </GridContent>
     );
@@ -73,9 +77,9 @@ class Analysis extends Component<AnalysisProps> {
 
 export default connect(
   ({
-    dashboardData,
-    loading,
-  }: {
+     dashboardData,
+     loading,
+   }: {
     dashboardData: any;
     loading: {
       effects: Record<string, boolean>;
