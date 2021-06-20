@@ -50,7 +50,6 @@ const handleRemove = async (fields: DeviceItem) => {
       device: fields.device,
     });
     hide();
-    // message.success('删除失败，请重试');
     return true;
   } catch (error) {
     hide();
@@ -96,6 +95,11 @@ const TableList: React.FC = () => {
     {
       title: <FormattedMessage id="device.table.data"/>,
       dataIndex: 'count',
+      hideInForm: true,
+    },
+    {
+      title: <FormattedMessage id="device.table.value"/>,
+      dataIndex: 'value',
       hideInForm: true,
     },
     {

@@ -7,6 +7,7 @@ export default {
   'device.table.name': 'Device Name',
   'device.table.name.required': 'Please enter the device name!',
   'device.table.data': 'Data',
+  'device.table.value': 'Value',
   'device.table.status': 'Status',
   'device.table.operation': 'Operation',
   'device.status.offline': 'Offline',

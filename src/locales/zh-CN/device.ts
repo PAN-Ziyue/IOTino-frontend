@@ -7,6 +7,7 @@ export default {
   'device.table.name': '设备名称',
   'device.table.name.required': '设备名称是必填项！',
   'device.table.data': '数据量',
+  'device.table.value': '值',
   'device.table.status': '状态',
   'device.table.operation': '操作',
   'device.status.offline': '离线',

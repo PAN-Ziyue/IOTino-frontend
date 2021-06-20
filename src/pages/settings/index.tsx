@@ -135,11 +135,6 @@ class Settings extends Component<SettingsProps, SettingsState> {
               <FormattedMessage id="settings.update"/>
             </Button>
           </Form.Item>
-          <Form.Item>
-            <Button type="link">
-              hello
-            </Button>
-          </Form.Item>
         </Form>
       </GridContent>
     );

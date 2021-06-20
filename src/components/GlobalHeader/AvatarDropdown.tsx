@@ -34,7 +34,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
       return;
     }
 
-    history.push(`/account/${key}`);
+    history.push(`/manage/${key}`);
   };
 
   render(): React.ReactNode {
@@ -43,7 +43,7 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         {menu && (
           <Menu.Item key="settings" >
-            <NavLink to="/manage/settings">
+            <NavLink to="/settings">
               <SettingOutlined />
               <FormattedMessage id="header.settings"/>
             </NavLink>
@@ -51,10 +51,8 @@ class AvatarDropdown extends React.Component<GlobalHeaderRightProps> {
         )}
         {menu && <Menu.Divider />}
         <Menu.Item key="logout">
-          {/*<NavLink>*/}
             <LogoutOutlined />
             <FormattedMessage id="header.logout"/>
-          {/*</NavLink>*/}
         </Menu.Item>
       </Menu>
     );

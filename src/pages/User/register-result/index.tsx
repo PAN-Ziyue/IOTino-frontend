@@ -1,11 +1,10 @@
-import { Button, Result } from 'antd';
-import type { IRouteProps } from 'umi';
-import { useIntl, FormattedMessage, Link } from 'umi';
+import {Button, Result} from 'antd';
+import type {IRouteProps} from 'umi';
+import {FormattedMessage, Link} from 'umi';
 import React from 'react';
 
 import styles from './index.less';
 
-const intl = useIntl();
 
 const actions = (
   <div className={styles.actions}>
@@ -17,7 +16,7 @@ const actions = (
   </div>
 );
 
-const RegisterResult: React.FC<IRouteProps> = ({ location }) => (
+const RegisterResult: React.FC<IRouteProps> = ({location}) => (
   <Result
     className={styles.registerResult}
     status="success"
@@ -25,11 +24,11 @@ const RegisterResult: React.FC<IRouteProps> = ({ location }) => (
       <div className={styles.title}>
         <FormattedMessage
           id="userandregister-result.register-result.msg"
-          values={{ email: (location?.state as any)?.account || 'AntDesign@example.com' }}
+          values={{email: (location?.state as any)?.account || 'AntDesign@example.com'}}
         />
       </div>
     }
-    subTitle={intl.formatMessage({ id: 'userandregister-result.register-result.activation-email' })}
+    subTitle={<FormattedMessage id="userandregister-result.register-result.back-home"/>}
     extra={actions}
   />
 );

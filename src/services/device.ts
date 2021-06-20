@@ -1,13 +1,13 @@
 import request from '@/utils/request';
-import type { DeviceParams } from '@/models/device';
+import type { DeviceParam } from '@/models/device';
 
-export async function queryDevice(params?: DeviceParams) {
+export async function queryDevice(params?: DeviceParam) {
   return request('/api/devices', {
     ...params,
   });
 }
 
-export async function removeRule(params?: DeviceParams) {
+export async function removeRule(params?: DeviceParam) {
   return request('/api/devices', {
     method: 'DELETE',
     data: {
@@ -16,7 +16,7 @@ export async function removeRule(params?: DeviceParams) {
   });
 }
 
-export async function addDevice(params: DeviceParams) {
+export async function addDevice(params: DeviceParam) {
   return request('/api/devices', {
     method: 'POST',
     data: {
@@ -25,7 +25,7 @@ export async function addDevice(params: DeviceParams) {
   });
 }
 
-export async function updateRule(params: DeviceParams) {
+export async function updateRule(params: DeviceParam) {
   return request('/api/devices', {
     method: 'PUT',
     data: {
