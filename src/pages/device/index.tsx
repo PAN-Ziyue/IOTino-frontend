@@ -1,5 +1,5 @@
 import {PlusOutlined} from '@ant-design/icons';
-import {Button, message, Divider, Form, Input,} from 'antd';
+import {Button, message, Divider, Form, Input} from 'antd';
 import React, {useState, useRef} from 'react';
 import {FormattedMessage, useIntl} from 'umi';
 import {GridContent} from '@ant-design/pro-layout';
@@ -11,6 +11,7 @@ import {queryDevice, updateRule, addDevice, removeRule} from '@/services/device'
 import CreateForm from './components/CreateForm';
 import UpdateForm from './components/UpdateForm';
 import type {DeviceItem} from '@/models/device';
+import DeviceLocation from "@/pages/device/components/LocationForm";
 
 
 const handleAdd = async (fields: DeviceItem) => {
@@ -59,9 +60,11 @@ const handleRemove = async (fields: DeviceItem) => {
 };
 
 const TableList: React.FC = () => {
-  const [createModalVisible, handleModalVisible] = useState<boolean>(false);
+  const [createModalVisible, handleCreateModalVisible] = useState<boolean>(false);
   const [updateModalVisible, handleUpdateModalVisible] = useState<boolean>(false);
+  const [locationModalVisible, handleLocationModalVisible] = useState<boolean>(false);
   const [updateDeviceValues, setUpdateDeviceValues] = useState<DeviceItem>();
+  const [locationDeviceValues, setLocationDeviceValues] = useState<DeviceItem>();
   const actionRef = useRef<ActionType>();
   const intl = useIntl();
 
@@ -69,7 +72,6 @@ const TableList: React.FC = () => {
     {
       title: <FormattedMessage id="device.table.device"/>,
       dataIndex: 'device',
-
       formItemProps: {
         rules: [
           {
@@ -78,11 +80,14 @@ const TableList: React.FC = () => {
           },
         ],
       },
+      render: (dom, entity) => {
+        setLocationDeviceValues(entity)
+        return <a onClick={() => handleLocationModalVisible(true)}>{dom}</a>;
+      },
     },
     {
       title: <FormattedMessage id="device.table.name"/>,
       dataIndex: 'name',
-
       formItemProps: {
         rules: [
           {
@@ -156,7 +161,7 @@ const TableList: React.FC = () => {
         options={false}
         pagination={false}
         toolBarRender={() => [
-          <Button type="primary" onClick={() => handleModalVisible(true)}>
+          <Button type="primary" onClick={() => handleCreateModalVisible(true)}>
             <PlusOutlined/>
             <FormattedMessage id="device.new"/>
           </Button>,
@@ -166,7 +171,7 @@ const TableList: React.FC = () => {
         rowSelection={false}
       />
       <CreateForm
-        onCancel={() => handleModalVisible(false)}
+        onCancel={() => handleCreateModalVisible(false)}
         modalVisible={createModalVisible}>
         <Form
           layout="vertical"
@@ -174,7 +179,7 @@ const TableList: React.FC = () => {
             async (value) => {
               const success = await handleAdd(value);
               if (success) {
-                handleModalVisible(false);
+                handleCreateModalVisible(false);
                 if (actionRef.current) {
                   actionRef.current.reload();
                 }
@@ -215,7 +220,7 @@ const TableList: React.FC = () => {
             async (value) => {
               const success = await handleUpdate(value);
               if (success) {
-                handleModalVisible(false);
+                handleUpdateModalVisible(false);
                 if (actionRef.current) {
                   actionRef.current.reload();
                 }
@@ -251,6 +256,14 @@ const TableList: React.FC = () => {
           </Form.Item>
         </Form>
       </UpdateForm>
+
+
+      <DeviceLocation
+        onCancel={() => handleLocationModalVisible(false)}
+        modalVisible={locationModalVisible}
+        trace={locationDeviceValues?.trace}>
+
+      </DeviceLocation>
     </GridContent>
   );
 };

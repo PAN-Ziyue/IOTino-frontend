@@ -66,10 +66,6 @@ export default defineConfig({
               path: '/manage/settings'
             },
             {
-              path: '/manage/devices/:device',
-              component: './device'
-            },
-            {
               component: '404',
             },
           ],

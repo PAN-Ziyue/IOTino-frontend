@@ -1,5 +1,6 @@
 import React from 'react';
-import { Modal } from 'antd';
+import {Modal} from 'antd';
+import {FormattedMessage} from "umi";
 
 
 interface UpdateFormProps {
@@ -7,14 +8,13 @@ interface UpdateFormProps {
   onCancel: () => void;
 }
 
-
 const UpdateForm: React.FC<UpdateFormProps> = (props) => {
-  const { modalVisible, onCancel } = props;
+  const {modalVisible, onCancel} = props;
 
   return (
     <Modal
       destroyOnClose
-      title="编辑设备"
+      title={<FormattedMessage id="device.edit.title"/>}
       visible={modalVisible}
       onCancel={() => onCancel()}
       footer={null}

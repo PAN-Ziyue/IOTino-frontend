@@ -1,4 +1,3 @@
-import component from './zh-CN/component';
 import globalHeader from './zh-CN/globalHeader';
 import menu from './zh-CN/menu';
 import pwa from './zh-CN/pwa';
@@ -19,7 +18,6 @@ export default {
   ...globalHeader,
   ...menu,
   ...pwa,
-  ...component,
   ...dashboard,
   ...device,
   ...settings,

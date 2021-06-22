@@ -14,6 +14,8 @@ export default {
   'device.status.normal': '正常',
   'device.status.alert': '告警',
   'device.edit': '编辑',
+  'device.edit.title': '编辑设备',
+  'device.location.title': '设备轨迹',
   'device.delete': '删除',
   'device.table.device.tip': '设备ID不能修改！'
 }

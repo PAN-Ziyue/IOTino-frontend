@@ -14,6 +14,8 @@ export default {
   'device.status.normal': 'Normal',
   'device.status.alert': 'Alert',
   'device.edit': 'Edit',
+  'device.edit.title': 'Edit Device',
+  'device.location.title': 'Device Location',
   'device.delete': 'Delete',
   'device.table.device.tip': 'Device ID cannot be modified!',
 }

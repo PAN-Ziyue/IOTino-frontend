@@ -2,7 +2,6 @@ import {AMapScene, Marker} from '@antv/l7-react';
 import {Card} from "antd";
 import {FormattedMessage} from "umi";
 import React from "react";
-
 import type {LocationDataType} from "@/models/dashboard";
 
 

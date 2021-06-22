@@ -4,8 +4,15 @@ export interface DeviceItem {
   status: string;
   count: number;
   value: number;
+  trace: DeviceLocation[];
 }
 
+
+export interface DeviceLocation {
+  latitude: number;
+  longitude: number;
+  time: number;
+}
 
 
 export interface DeviceParam {
@@ -14,6 +21,7 @@ export interface DeviceParam {
   name?: string;
   count?: number;
   value?: number;
+
   pageSize?: number;
   currentPage?: number;
   filter?: Record<string, any[]>;
