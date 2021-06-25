@@ -1,5 +1,5 @@
 import {LockOutlined, MailOutlined, UserOutlined,} from '@ant-design/icons';
-import {Alert, Tabs} from 'antd';
+import {Alert, Tabs, Divider} from 'antd';
 import React, {useState} from 'react';
 import ProForm, {ProFormText} from '@ant-design/pro-form';
 import {useIntl, Link, connect, FormattedMessage} from 'umi';
@@ -195,13 +195,11 @@ const Login: React.FC<LoginProps> = (props) => {
         )}
 
         <div style={{marginBottom: 24}}>
-          <Link className={styles.login} to="/user/register">
+          <Link className={styles.login} to="/user/register" style={{float: 'right'}}>
             <FormattedMessage id="pages.login.registerAccount"/>
           </Link>
-          <a style={{float: 'right'}}>
-            <FormattedMessage id="pages.login.forgotPassword"/>
-          </a>
         </div>
+        <Divider/>
       </ProForm>
     </div>
   );

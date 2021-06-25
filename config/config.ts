@@ -27,7 +27,7 @@ export default defineConfig({
   },
   // umi routes: https://umijs.org/docs/routing
   routes: [
-    {path: '/', component: '../layouts/BlankLayout'},
+    {path: '/', component: '../layouts/BlankLayout', redirect: '/user/login'},
     {
       path: '/user',
       component: '../layouts/UserLayout',
