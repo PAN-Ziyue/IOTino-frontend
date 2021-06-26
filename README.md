@@ -16,7 +16,7 @@ $ yarn start
 ## Check code style
 
 ```bash
-npm run lint
+yarn lint
 ```
 ## More
 
